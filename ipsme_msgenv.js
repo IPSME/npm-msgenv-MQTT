@@ -17,8 +17,8 @@ exports.subscribe= function(handler) {
 	if (handler.subscription_ID !== undefined)
 		return;
 	console.log('MsgEnv: subscribe');
-    handler.subscription_ID= systemPreferences.subscribeNotification(null, function(event, userInfo, object) {
-        this(event);
+    handler.subscription_ID= systemPreferences.subscribeNotification('IPSME', function(event, userInfo, object) {
+        this(userInfo.msg);
     }.bind(handler));    
 }
 
@@ -31,7 +31,7 @@ exports.unsubscribe= function(handler) {
 // Normally a {name, object, userInfo} tuple, but in electron it is apparently not possible
 // to specify the (sender) object explicitly; gets set automagically?!
 exports.publish= function(msg) {
-    systemPreferences.postNotification(msg, {}, true);
+    systemPreferences.postNotification('IPSME', { "msg" : msg }, true);
 }
 
 //-------------------------------------------------------------------------------------------------
