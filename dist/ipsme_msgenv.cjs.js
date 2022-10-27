@@ -60,7 +60,7 @@ function subscribe_(handler) {
 	if (handler.subscription_ID !== undefined)
 		return;
     LOGR_.log(l_.CXNS, cfg_.prefix +'MsgEnv: subscribe');
-    handler.subscription_ID= systemPreferences.subscribeNotification('IPSME', function(event, userInfo, object) {
+    handler.subscription_ID= systemPreferences.subscribeNotification(cfg_.channel, function(event, userInfo, object) {
         LOGR_.log(l_.REFL, cfg_.prefix +'MsgEnv: onNotification: ', userInfo.msg);
         this(userInfo.msg);
     }.bind(handler));    
@@ -77,7 +77,7 @@ function unsubscribe_(handler) {
 // to specify the (sender) object explicitly; gets set automagically?!
 function publish_(msg) {
     LOGR_.log(l_.REFL, cfg_.prefix +'MsgEnv: postNotification: ', msg);
-    systemPreferences.postNotification('IPSME', { "msg" : msg }, true);
+    systemPreferences.postNotification(cfg_.channel, { "msg" : msg }, true);
 }
 
 //-------------------------------------------------------------------------------------------------
