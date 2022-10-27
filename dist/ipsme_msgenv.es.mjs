@@ -1,5 +1,4 @@
-
-const { systemPreferences } = require('electron')
+const { systemPreferences } = require('electron');
 const { BitLogr } = require ('@knev/bitlogr');
 
 // https://www.electronjs.org/docs/latest/api/system-preferences#systempreferencessubscribenotificationevent-callback-macos
@@ -10,7 +9,7 @@ const { BitLogr } = require ('@knev/bitlogr');
 
 //-------------------------------------------------------------------------------------------------
 
-let LOGR_= new BitLogr();
+new BitLogr();
 
 
 
@@ -26,18 +25,18 @@ exports.subscribe= function(handler) {
     handler.subscription_ID= systemPreferences.subscribeNotification('IPSME', function(event, userInfo, object) {
         this(userInfo.msg);
     }.bind(handler));    
-}
+};
 
 // we have to use the ID, rather than the handler itself to unsubsribe
 exports.unsubscribe= function(handler) {
     systemPreferences.unsubscribeNotification(handler.subscription_ID);
     delete handler.subscription_ID;
-}
+};
 
 // Normally a {name, object, userInfo} tuple, but in electron it is apparently not possible
 // to specify the (sender) object explicitly; gets set automagically?!
 exports.publish= function(msg) {
     systemPreferences.postNotification('IPSME', { "msg" : msg }, true);
-}
+};
 
 //-------------------------------------------------------------------------------------------------
