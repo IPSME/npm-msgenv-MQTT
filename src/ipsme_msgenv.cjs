@@ -1,7 +1,6 @@
 
 const { systemPreferences } = require('electron');
-
-import { BitLogr, l_LL } from '@knev/bitlogr';
+const { BitLogr } = require ('@knev/bitlogr');
 
 // https://www.electronjs.org/docs/latest/api/system-preferences#systempreferencessubscribenotificationevent-callback-macos
 // Under the hood this API subscribes to NSDistributedNotificationCenter

@@ -1,14 +1,14 @@
 {
   "name": "@ipsme/msgenv-electron-nsdnc",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Now: Apple won't fix nil reports all notificaitons on latest OS.",
   "exports": {
     "node": {
-      "module": "./dist/ipsme_msgenv.es.mjs",
       "require": "./dist/ipsme_msgenv.cjs.js"
     },
-    "default": "./dist/ipsme_msgenv.es.mjs"
+    "default": "./dist/ipsme_msgenv.cjs.js"
   },
+  "type": "commonjs",
   "scripts": {
     "build": "rollup --config",
     "test": "test.js",
