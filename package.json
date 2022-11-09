@@ -1,6 +1,6 @@
 {
   "name": "@ipsme/msgenv-electron-nsdnc",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "Now: Apple won't fix nil reports all notificaitons on latest OS.",
   "exports": {
     "node": {
@@ -31,6 +31,8 @@
     "@knev/bitlogr": "^0.2.1"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^23.0.2",
+    "@rollup/plugin-node-resolve": "^15.0.1",
     "del-cli": "^5.0.0",
     "rollup": "^3.2.3"
   }
