@@ -1,5 +1,5 @@
 {
-  "name": "@ipsme/msgenv-electron-mqtt",
+  "name": "@ipsme/msgenv-mqtt",
   "version": "0.0.18",
   "description": "",
   "exports": {
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/IPSME/npm-msgenv-electron-MQTT.git"
+    "url": "git+https://github.com/IPSME/npm-msgenv-MQTT.git"
   },
   "keywords": [
     "ipsme"
@@ -24,9 +24,9 @@
   "author": "K.Nevelsteen, PhD",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/IPSME/npm-msgenv-electron-MQTT/issues"
+    "url": "https://github.com/IPSME/npm-msgenv-MQTT/issues"
   },
-  "homepage": "https://github.com/IPSME/npm-msgenv-electron-MQTT#readme",
+  "homepage": "https://github.com/IPSME/npm-msgenv-MQTT#readme",
   "dependencies": {
     "@knev/bitlogr": "^0.2.1",
     "mqtt": "^5.1.4"
