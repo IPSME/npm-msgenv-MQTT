@@ -28,7 +28,8 @@
   },
   "homepage": "https://github.com/IPSME/npm-msgenv-electron-MQTT#readme",
   "dependencies": {
-    "@knev/bitlogr": "^0.2.1"
+    "@knev/bitlogr": "^0.2.1",
+    "mqtt": "^5.1.4"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^23.0.2",
