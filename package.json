@@ -1,7 +1,7 @@
 {
-  "name": "@ipsme/msgenv-electron-nsdnc",
-  "version": "0.2.1",
-  "description": "Now: Apple won't fix nil reports all notificaitons on latest OS.",
+  "name": "@ipsme/msgenv-electron-mqtt",
+  "version": "0.0.0",
+  "description": "",
   "exports": {
     "node": {
       "require": "./dist/ipsme_msgenv.cjs.js"
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/IPSME/npm-msgenv-electron-NSDNC.git"
+    "url": "git+https://github.com/IPSME/npm-msgenv-electron-MQTT.git"
   },
   "keywords": [
     "ipsme"
@@ -24,9 +24,9 @@
   "author": "K.Nevelsteen, PhD",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/IPSME/npm-msgenv-electron-NSDNC/issues"
+    "url": "https://github.com/IPSME/npm-msgenv-electron-MQTT/issues"
   },
-  "homepage": "https://github.com/IPSME/npm-msgenv-electron-NSDNC#readme",
+  "homepage": "https://github.com/IPSME/npm-msgenv-electron-MQTT#readme",
   "dependencies": {
     "@knev/bitlogr": "^0.2.1"
   },
