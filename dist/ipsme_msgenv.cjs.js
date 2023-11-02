@@ -1,12 +1,7 @@
 'use strict';
 
-require('electron');
 const mqtt = require('mqtt');
 const { BitLogr } = require ('@knev/bitlogr');
-
-// https://www.electronjs.org/docs/latest/api/system-preferences#systempreferencessubscribenotificationevent-callback-macos
-// Under the hood this API subscribes to NSDistributedNotificationCenter
-// The object is the sender of the notification, and only supports NSString values for now.
 
 // https://www.tutorialsteacher.com/nodejs/nodejs-module-exports
 

@@ -1,6 +1,6 @@
 {
   "name": "@ipsme/msgenv-mqtt",
-  "version": "0.0.18",
+  "version": "0.0.21",
   "description": "",
   "exports": {
     "node": {
