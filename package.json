@@ -1,6 +1,6 @@
 {
   "name": "@ipsme/msgenv-mqtt",
-  "version": "0.0.21",
+  "version": "0.0.24",
   "description": "",
   "exports": {
     "node": {
@@ -32,9 +32,9 @@
     "mqtt": "^5.1.4"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^23.0.2",
+    "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
-    "del-cli": "^5.0.0",
-    "rollup": "^3.2.3"
+    "del-cli": "^6.0.0",
+    "rollup": "^4.27.3"
   }
 }
