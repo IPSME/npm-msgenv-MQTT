@@ -13,6 +13,8 @@ function handler_(msg)
 
 
 async function demo() {
+    console.log('1 and 3.o should appear, not 2.o');
+
     IPSME_MsgEnv_OS.subscribe( handler_ );
     IPSME_MsgEnv_OS.publish('BOOYAH 1');
 
