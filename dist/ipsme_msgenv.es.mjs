@@ -1,19 +1,17 @@
-'use strict';
-
-var require$$0$6 = require('stream');
-var require$$0$4 = require('buffer');
-var require$$0$5 = require('events');
-var require$$0$7 = require('tty');
-var require$$1 = require('util');
-var require$$7 = require('url');
-var require$$1$2 = require('https');
-var require$$2 = require('http');
-var require$$1$3 = require('net');
-var require$$4 = require('tls');
-var require$$1$1 = require('crypto');
-var require$$0$8 = require('zlib');
-var require$$3 = require('dns');
-var require$$5 = require('assert');
+import require$$0$6 from 'stream';
+import require$$0$4 from 'buffer';
+import require$$0$5 from 'events';
+import require$$0$7 from 'tty';
+import require$$1 from 'util';
+import require$$7 from 'url';
+import require$$1$2 from 'https';
+import require$$2 from 'http';
+import require$$1$3 from 'net';
+import require$$4 from 'tls';
+import require$$1$1 from 'crypto';
+import require$$0$8 from 'zlib';
+import require$$3 from 'dns';
+import require$$5 from 'assert';
 
 // https://stackoverflow.com/questions/4602141/variable-name-as-a-string-in-javascript
 // console.log('OUT', __name({variableName}) );
@@ -31436,8 +31434,4 @@ function publish_(msg) {
     instance.client.publish(kstr_TOPIC, msg);
 }
 
-exports.config = cfg_;
-exports.logr = logr_;
-exports.publish = publish_;
-exports.subscribe = subscribe_;
-exports.unsubscribe = unsubscribe_;
+export { cfg_ as config, logr_ as logr, publish_ as publish, subscribe_ as subscribe, unsubscribe_ as unsubscribe };
