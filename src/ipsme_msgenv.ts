@@ -111,10 +111,10 @@ function publish_(msg) {
 
 //-------------------------------------------------------------------------------------------------
 
-export default {
-    config : cfg_,
-    subscribe : subscribe_,
-    unsubscribe : unsubscribe_,
-    publish : publish_
-    // l : l_,
+export {
+    cfg_ as config,
+    subscribe_ as subscribe,
+    unsubscribe_ as unsubscribe,
+    publish_ as publish,
+    logr_ as logr
 }
