@@ -1,4 +1,5 @@
 
+import { LOGR, l_array } from '@knev/bitlogr';
 import mqtt, { MqttClient, IClientOptions } from 'mqtt';
 
 // const mqtt = require('mqtt');
@@ -8,14 +9,9 @@ import mqtt, { MqttClient, IClientOptions } from 'mqtt';
 
 //-------------------------------------------------------------------------------------------------
 
-// let LOGR_= new BitLogr();
-
-// const l_ = {
-// 	MsgEnv : 0b1 << 0,	// MsgEnv
-// 	CXNS : 0b1 << 1,	// connections
-// 	REFL : 0b1 << 2,	// reflection
-// }
-// LOGR_.labels= l_;
+const LOGR_= LOGR.get_instance();
+const logr_= LOGR_.create({ labels: l_array(['CONNECTIONS', 'REFLECTION']) });
+const l_= logr_.l;
 
 //-------------------------------------------------------------------------------------------------
 
@@ -79,7 +75,7 @@ class MsgEnvSingleton {
 function subscribe_(handler) {
 	if (handler.subscription_ID !== undefined)
 		return;
-    // LOGR_.log(l_.CXNS, cfg_.prefix +'MsgEnv: subscribe');
+    logr_.log(l_.CONNECTIONS, cfg_.prefix +'MsgEnv: subscribe');
     // handler.subscription_ID= systemPreferences.subscribeNotification(cfg_.channel, function(event, userInfo, object) {
     //     LOGR_.log(l_.REFL, cfg_.prefix +'MsgEnv: onNotification: ', userInfo.msg);
     //     this(userInfo.msg);
@@ -96,7 +92,7 @@ function subscribe_(handler) {
 
 // we have to use the ID, rather than the handler itself to unsubsribe
 function unsubscribe_(handler) {
-    // LOGR_.log(l_.CXNS, cfg_.prefix +'MsgEnv: unsubscribe');
+    logr_.log(l_.CONNECTIONS, cfg_.prefix +'MsgEnv: unsubscribe');
     // systemPreferences.unsubscribeNotification(handler.subscription_ID);
     let instance = MsgEnvSingleton.getInstance();
     instance.client.removeListener('message', handler.subscription_ID);
@@ -107,7 +103,7 @@ function unsubscribe_(handler) {
 // Normally a {name, object, userInfo} tuple, but in electron it is apparently not possible
 // to specify the (sender) object explicitly; gets set automagically?!
 function publish_(msg) {
-    // LOGR_.log(l_.REFL, cfg_.prefix +'MsgEnv: postNotification: ', msg);
+    logr_.log(l_.REFLECTION, cfg_.prefix +'MsgEnv: postNotification: ', msg);
     // systemPreferences.postNotification(cfg_.channel, { "msg" : msg }, true);
     let instance = MsgEnvSingleton.getInstance();
     instance.client.publish(kstr_TOPIC, msg);
