@@ -51,7 +51,11 @@ class MsgEnvSingleton {
     public readonly client: MqttClient;
 
     constructor() {
-        this.client = mqtt.connect('mqtt://localhost:1883');
+        this.client = mqtt.connect({
+            protocol: 'mqtt',
+            hostname: 'localhost',   // or '127.0.0.1'
+            port: 1883
+        });
 
         this.client.on('error', function (err) {
             console.error('MQTT Connection Error:', err);
