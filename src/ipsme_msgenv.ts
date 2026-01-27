@@ -46,7 +46,8 @@ var cfg_= (function() {
 const kstr_TOPIC = 'IPSME';
 
 class MsgEnvSingleton {
-    private static _instance: MsgEnvSingleton | null = null;
+    static _instance: MsgEnvSingleton | null = null;
+    private _disposed: boolean = false;
 
     public readonly client: MqttClient;
 
@@ -64,14 +65,44 @@ class MsgEnvSingleton {
         this.client.on('connect', function () {
             // console.log('MQTT Connected');
         });
+
+        this.client.on('close', () => {
+            if (!this._disposed) {
+                logr_.log(l_.CONNECTIONS, () => ['MQTT client disconnected unexpectedly']);
+            }
+        });
     }
 
-    public static getInstance() : MsgEnvSingleton {
+    public static get_instance() : MsgEnvSingleton {
         if (! MsgEnvSingleton._instance) {
             MsgEnvSingleton._instance = new MsgEnvSingleton();
         }
         return MsgEnvSingleton._instance;
     }
+
+    public dispose(callback?: (err?: Error) => void): void {
+        if (this._disposed) {
+            callback?.();
+            return;
+        }
+
+        this._disposed = true;
+
+        logr_.log(l_.CONNECTIONS, () => ['MsgEnv: disposing MQTT client']);
+
+        // End the client connection gracefully
+        this.client.end(true, {}, (err) => {
+            if (err) {
+                console.error('Error during MQTT client shutdown:', err);
+                callback?.(err);
+                return;
+            }
+
+            logr_.log(l_.CONNECTIONS, () => ['MsgEnv: MQTT client cleanly disconnected']);
+            callback?.();
+        });
+    }
+
 }
 
 // Normally you can specify an object to filter on when subscribing, but in electron that is missing
@@ -85,7 +116,7 @@ function subscribe_(handler) {
     //     this(userInfo.msg);
     // }.bind(handler));    
 
-    let instance = MsgEnvSingleton.getInstance();
+    let instance = MsgEnvSingleton.get_instance();
     handler.subscription_ID = function (topic, message) {
         handler(message.toString());
     };
@@ -98,7 +129,7 @@ function subscribe_(handler) {
 function unsubscribe_(handler) {
     logr_.log(l_.CONNECTIONS, () => [cfg_.prefix +'MsgEnv: unsubscribe'] );
     // systemPreferences.unsubscribeNotification(handler.subscription_ID);
-    let instance = MsgEnvSingleton.getInstance();
+    let instance = MsgEnvSingleton.get_instance();
     instance.client.removeListener('message', handler.subscription_ID);
     instance.client.unsubscribe(kstr_TOPIC);
     delete handler.subscription_ID;
@@ -109,8 +140,19 @@ function unsubscribe_(handler) {
 function publish_(msg) {
     logr_.log(l_.REFLECTION, () => [cfg_.prefix +'MsgEnv: postNotification: ', msg] );
     // systemPreferences.postNotification(cfg_.channel, { "msg" : msg }, true);
-    let instance = MsgEnvSingleton.getInstance();
+    let instance = MsgEnvSingleton.get_instance();
     instance.client.publish(kstr_TOPIC, msg);
+}
+
+function dispose_(callback ?: (err?: Error) => void): void {
+    if (! MsgEnvSingleton._instance) {
+        logr_.log(l_.CONNECTIONS, () => ['MsgEnv: dispose called but no instance exists']);
+        callback?.();
+        return;
+    }
+
+    MsgEnvSingleton._instance.dispose(callback);
+    MsgEnvSingleton._instance = null; // Allow re-creation if needed later
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -120,5 +162,6 @@ export {
     subscribe_ as subscribe,
     unsubscribe_ as unsubscribe,
     publish_ as publish,
+    dispose_ as dispose,
     logr_ as logr
 }

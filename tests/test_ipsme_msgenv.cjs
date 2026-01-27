@@ -27,6 +27,10 @@ async function demo() {
 
     IPSME_MsgEnv_OS.subscribe( handler_ );
     IPSME_MsgEnv_OS.publish('BOOYAH 3.o');
+
+    await sleep(2000);
+
+    IPSME_MsgEnv_OS.dispose();
 }
 
 demo();
