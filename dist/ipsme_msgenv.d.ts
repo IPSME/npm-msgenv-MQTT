@@ -11,4 +11,5 @@ declare var cfg_: {
 declare function subscribe_(handler: any): void;
 declare function unsubscribe_(handler: any): void;
 declare function publish_(msg: any): void;
-export { cfg_ as config, subscribe_ as subscribe, unsubscribe_ as unsubscribe, publish_ as publish, logr_ as logr };
+declare function dispose_(callback?: (err?: Error) => void): void;
+export { cfg_ as config, subscribe_ as subscribe, unsubscribe_ as unsubscribe, publish_ as publish, dispose_ as dispose, logr_ as logr };
