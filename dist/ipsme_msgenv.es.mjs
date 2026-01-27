@@ -31404,7 +31404,7 @@ class MsgEnvSingleton {
 function subscribe_(handler) {
     if (handler.subscription_ID !== undefined)
         return;
-    logr_.log(l_.CONNECTIONS, cfg_.prefix + 'MsgEnv: subscribe');
+    logr_.log(l_.CONNECTIONS, () => [cfg_.prefix + 'MsgEnv: subscribe']);
     // handler.subscription_ID= systemPreferences.subscribeNotification(cfg_.channel, function(event, userInfo, object) {
     //     LOGR_.log(l_.REFL, cfg_.prefix +'MsgEnv: onNotification: ', userInfo.msg);
     //     this(userInfo.msg);
@@ -31418,7 +31418,7 @@ function subscribe_(handler) {
 }
 // we have to use the ID, rather than the handler itself to unsubsribe
 function unsubscribe_(handler) {
-    logr_.log(l_.CONNECTIONS, cfg_.prefix + 'MsgEnv: unsubscribe');
+    logr_.log(l_.CONNECTIONS, () => [cfg_.prefix + 'MsgEnv: unsubscribe']);
     // systemPreferences.unsubscribeNotification(handler.subscription_ID);
     let instance = MsgEnvSingleton.getInstance();
     instance.client.removeListener('message', handler.subscription_ID);
@@ -31428,7 +31428,7 @@ function unsubscribe_(handler) {
 // Normally a {name, object, userInfo} tuple, but in electron it is apparently not possible
 // to specify the (sender) object explicitly; gets set automagically?!
 function publish_(msg) {
-    logr_.log(l_.REFLECTION, cfg_.prefix + 'MsgEnv: postNotification: ', msg);
+    logr_.log(l_.REFLECTION, () => [cfg_.prefix + 'MsgEnv: postNotification: ', msg]);
     // systemPreferences.postNotification(cfg_.channel, { "msg" : msg }, true);
     let instance = MsgEnvSingleton.getInstance();
     instance.client.publish(kstr_TOPIC, msg);
