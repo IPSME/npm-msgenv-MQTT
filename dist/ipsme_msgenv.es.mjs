@@ -13001,7 +13001,7 @@ var auth = {};
 
 var shared = {};
 
-var version = "5.14.1";
+var version = "5.15.1";
 var require$$0$2 = {
 	version: version};
 
@@ -31288,6 +31288,7 @@ function requireMqtt () {
 		exports$1.Client = client_1.default;
 		__exportStar(requireClient(), exports$1);
 		__exportStar(requireShared(), exports$1);
+		__exportStar(requireValidations(), exports$1);
 		var ack_1 = requireAck();
 		Object.defineProperty(exports$1, "ReasonCodes", { enumerable: true, get: function () { return ack_1.ReasonCodes; } });
 		
