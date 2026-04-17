@@ -58,18 +58,21 @@ class MsgEnvSingleton {
             port: 1883
         });
 
-        this.client.on('error', function (err) {
+        this.client.on('error', (err) => {
             console.error('MQTT Connection Error:', err);
         });
 
-        this.client.on('connect', function () {
-            // console.log('MQTT Connected');
+        this.client.on('connect', () => {
+            logr_.log(l_.CONNECTIONS, () => ['MQTT connected / reconnected successfully']);
+        });
+
+        this.client.on('disconnect', () => {
+            logr_.log(l_.CONNECTIONS, () => ['MQTT clean disconnect']);
         });
 
         this.client.on('close', () => {
-            if (!this._disposed) {
-                logr_.log(l_.CONNECTIONS, () => ['MQTT client disconnected unexpectedly']);
-            }
+            if (this._disposed) return;
+            logr_.log(l_.CONNECTIONS, () => ['MQTT DISCONNECTED unexpectedly (will auto-reconnect)']);
         });
     }
 
